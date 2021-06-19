@@ -1,0 +1,2 @@
+# GitMore
+Simplifying GIT functionality.
