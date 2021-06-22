@@ -2,7 +2,7 @@
 Simplifying GIT functionality.
 
 ## Feature
-- Git Clean : UI support to delete branch on local and remote.
+- Git Clean : Dedicated Toolwindow to delete branch on local and remote.
 
     
     ![image](https://user-images.githubusercontent.com/6188628/122984663-435c0e80-d36b-11eb-9619-e9b044c5c83c.png)
