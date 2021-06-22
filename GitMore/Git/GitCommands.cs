@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-using System.Text;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 
 namespace GitMore.Git
@@ -47,9 +47,7 @@ namespace GitMore.Git
 
         public static string GetGitRepoPath()
         {
-            return @"C:\Users\nhegde\source\myrepos\opencode";
-            //return @"C:\Users\nhegde\source\repos\kirby\src\Applications\Services\";
-            //return FindGitWorkingDir(Directory.GetCurrentDirectory());
+            return FindGitWorkingDir(GitCleanCommand.ProjectFolder);
         }
 
         public static Process RunGitEx(string command)

@@ -1,11 +1,12 @@
-﻿using GitMore.Core;
-using GitMore.Git;
+﻿using EnvDTE80;
+using GitMore.Core;
 using GitMore.Model;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Design;
+using System.IO;
 using Task = System.Threading.Tasks.Task;
 
 namespace GitMore
@@ -82,6 +83,12 @@ namespace GitMore
             private set;
         }
 
+        public static string ProjectFolder
+        {
+            get;
+            private set;
+        }
+
         /// <summary>
         /// Gets the service provider from the owner package.
         /// </summary>
@@ -106,6 +113,8 @@ namespace GitMore
             OleMenuCommandService commandService = await package.GetServiceAsync(typeof(IMenuCommandService)) as OleMenuCommandService;
             Instance = new GitCleanCommand(package, commandService);
 
+            var dte2 = (DTE2)System.Runtime.InteropServices.Marshal.GetActiveObject("VisualStudio.DTE.16.0");
+            ProjectFolder = Directory.GetParent(dte2.Solution.FullName).FullName;
         }
 
         /// <summary>
@@ -153,7 +162,6 @@ namespace GitMore
 
             UpdateList();
         }
-
 
         private void LocalBranchButtonHandler(object sender, EventArgs e)
         {

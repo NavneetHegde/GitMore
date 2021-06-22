@@ -2,6 +2,7 @@
 using GitMore.Model;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace GitMore.Core
 {
@@ -31,12 +32,19 @@ namespace GitMore.Core
         public static string DeleteBranch(GitBranch branch)
         {
             string gitCommand;
+            string branchName;
             if (branch.Type == BranchType.Remote)
+            {
                 gitCommand = GitCommands.GitDeleteRemoteBranchCommand;
+                branchName = branch.Name;
+            }
             else
+            {
                 gitCommand = GitCommands.GitDeleteLocalBranchCommand;
+                branchName = branch.FullName;
+            }
 
-            return GitCommands.RunGitExWait($"{gitCommand} {branch.Name}");
+            return GitCommands.RunGitExWait($"{gitCommand} {branchName}");
         }
 
         #region Private
@@ -63,7 +71,7 @@ namespace GitMore.Core
                             Type = type,
                             DisplayName = $"{branchData?.ToString().Trim()}",
                             FullName = branch?.Trim(),
-                            Name = branch.Substring(branch.IndexOf("/") + 1).Trim(),
+                            Name = branch.Split('/').Last(),
                         });
                 }
             }
