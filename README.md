@@ -2,7 +2,7 @@
 Simplifying GIT functionality.
 
 ## Feature
-- Git Clean : UI support to delete branche on local and remote.
+- Git Clean : UI support to delete branch on local and remote.
 
 ## Requirements
   Works with GIT installed for Visual Studio 2019
