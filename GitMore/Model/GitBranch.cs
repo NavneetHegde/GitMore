@@ -10,7 +10,7 @@
         public string DisplayName { get; set; }
         public string FullName { get; set; }
         public string Name { get; set; }
-
+        public string RemoteName { get; set; }
     }
 
     public enum BranchType

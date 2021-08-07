@@ -36,7 +36,7 @@ namespace GitMore.Core
             if (branch.Type == BranchType.Remote)
             {
                 gitCommand = GitCommands.GitDeleteRemoteBranchCommand;
-                branchName = branch.Name;
+                branchName = branch.RemoteName;
             }
             else
             {
@@ -72,6 +72,7 @@ namespace GitMore.Core
                             DisplayName = $"{branchData?.ToString().Trim()}",
                             FullName = branch?.Trim(),
                             Name = branch.Split('/').Last(),
+                            RemoteName = string.Join("/", branch.Split('/').SkipWhile(name => name.Trim().Equals("origin")))
                         });
                 }
             }

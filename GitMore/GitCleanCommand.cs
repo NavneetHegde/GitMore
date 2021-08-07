@@ -1,4 +1,4 @@
-﻿using EnvDTE80;
+﻿using EnvDTE;
 using GitMore.Core;
 using GitMore.Model;
 using Microsoft.VisualStudio.Shell;
@@ -113,8 +113,6 @@ namespace GitMore
             OleMenuCommandService commandService = await package.GetServiceAsync(typeof(IMenuCommandService)) as OleMenuCommandService;
             Instance = new GitCleanCommand(package, commandService);
 
-            var dte2 = (DTE2)System.Runtime.InteropServices.Marshal.GetActiveObject("VisualStudio.DTE.16.0");
-            ProjectFolder = Directory.GetParent(dte2.Solution.FullName).FullName;
         }
 
         /// <summary>
@@ -140,9 +138,20 @@ namespace GitMore
 
         }
 
+
+        public static string GetProjectFolder()
+        {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
+            // Get an instance of the currently running Visual Studio IDE
+            //DTE2 dte = package.GetServiceAsync(typeof(DTE2)) as DTE2;
+            DTE dte = Package.GetGlobalService(typeof(SDTE)) as DTE;
+            return Path.GetDirectoryName(dte.Solution.FullName);
+        }
+
         private void FetchBranchButtonHandler(object sender, EventArgs e)
         {
-            LogData.Add(new LogInfo { Record = $"Fetching remote branches" });
+            LogData.Add(new LogInfo { Record = $"Fetching remote branches for (GIT {GetProjectFolder()})" });
 
             var branches = GitCleanManager.FetchBranches(BranchType.Remote);
 

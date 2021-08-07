@@ -47,7 +47,7 @@ namespace GitMore.Git
 
         public static string GetGitRepoPath()
         {
-            return FindGitWorkingDir(GitCleanCommand.ProjectFolder);
+            return FindGitWorkingDir(GitCleanCommand.GetProjectFolder());
         }
 
         public static Process RunGitEx(string command)
