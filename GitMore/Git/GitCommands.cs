@@ -1,4 +1,7 @@
-﻿using System;
+﻿using envDTE = EnvDTE;
+using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Interop;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -47,12 +50,18 @@ namespace GitMore.Git
 
         public static string GetGitRepoPath()
         {
-            return FindGitWorkingDir(GitCleanCommand.GetProjectFolder());
+            ThreadHelper.ThrowIfNotOnUIThread();
+
+            envDTE.DTE dte = Package.GetGlobalService(typeof(SDTE)) as envDTE.DTE;
+            var folderPath = Path.GetDirectoryName(dte.Solution.FullName);
+            return FindGitWorkingDir(folderPath);
         }
 
         public static Process RunGitEx(string command)
         {
             string path = GetGitExePath();
+
+            ThreadHelper.ThrowIfNotOnUIThread();
             string workDir = GetGitRepoPath();
             ProcessStartInfo startInfo = CreateStartInfo(path, command, workDir, Encoding.UTF8);
 
@@ -105,6 +114,7 @@ namespace GitMore.Git
 
         public static string RunGitExWait(string command)
         {
+            ThreadHelper.ThrowIfNotOnUIThread();
             using (var process = RunGitEx(command))
             {
                 string output = process.StandardOutput.ReadToEnd();

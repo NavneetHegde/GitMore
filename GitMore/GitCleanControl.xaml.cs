@@ -1,5 +1,6 @@
 ﻿using GitMore.Core;
 using GitMore.Model;
+using Microsoft.VisualStudio.Shell;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
 
@@ -25,6 +26,9 @@ namespace GitMore
 
             var BranchesData = new ObservableCollection<GitBranch>();
             BranchesData.Clear();
+
+            ThreadHelper.ThrowIfNotOnUIThread();
+
             var branches = GitCleanManager.GetBranches(type);
             BranchesData = branches;
 
@@ -36,6 +40,8 @@ namespace GitMore
         {
             var butoonContext = (Button)e.OriginalSource;
             GitBranch branchData = (GitBranch)butoonContext.DataContext;
+
+            ThreadHelper.ThrowIfNotOnUIThread();
 
             var LogData = (ObservableCollection<LogInfo>)ListViewLog.DataContext;
             LogData.Add(new LogInfo { Record = $"Deleting {branchData.Type} branch :: {branchData.FullName}" });

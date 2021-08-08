@@ -1,5 +1,6 @@
 ﻿using GitMore.Git;
 using GitMore.Model;
+using Microsoft.VisualStudio.Shell;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -14,17 +15,21 @@ namespace GitMore.Core
         public static ObservableCollection<GitBranch> GetBranches(BranchType type)
         {
             // set git command 
-            string gitCommand = string.Empty;
+            string gitCommand;
             if (type == BranchType.Remote)
                 gitCommand = GitCommands.GitGetRemoteBranchCommand;
             else
                 gitCommand = GitCommands.GitGetLocalBranchCommand;
 
+            ThreadHelper.ThrowIfNotOnUIThread();
             return ExtractBranches(type, gitCommand);
         }
 
         public static ObservableCollection<GitBranch> FetchBranches(BranchType type)
         {
+
+            ThreadHelper.ThrowIfNotOnUIThread();
+
             string gitCommand = GitCommands.GitFetchCommand;
             return ExtractBranches(type, gitCommand);
         }
@@ -44,6 +49,8 @@ namespace GitMore.Core
                 branchName = branch.FullName;
             }
 
+
+            ThreadHelper.ThrowIfNotOnUIThread();
             return GitCommands.RunGitExWait($"{gitCommand} {branchName}");
         }
 
@@ -51,6 +58,9 @@ namespace GitMore.Core
 
         private static ObservableCollection<GitBranch> ExtractBranches(BranchType type, string gitCommand)
         {
+
+            ThreadHelper.ThrowIfNotOnUIThread();
+
             var branchesCollection = new ObservableCollection<GitBranch>();
             string beanchesCommand = GitCommands.RunGitExWait(gitCommand);
             string[] branches = beanchesCommand.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);

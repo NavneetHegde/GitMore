@@ -90,17 +90,6 @@ namespace GitMore
         }
 
         /// <summary>
-        /// Gets the service provider from the owner package.
-        /// </summary>
-        private Microsoft.VisualStudio.Shell.IAsyncServiceProvider ServiceProvider
-        {
-            get
-            {
-                return this.package;
-            }
-        }
-
-        /// <summary>
         /// Initializes the singleton instance of the command.
         /// </summary>
         /// <param name="package">Owner package, not null.</param>
@@ -151,6 +140,8 @@ namespace GitMore
 
         private void FetchBranchButtonHandler(object sender, EventArgs e)
         {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
             LogData.Add(new LogInfo { Record = $"Fetching remote branches for (GIT {GetProjectFolder()})" });
 
             var branches = GitCleanManager.FetchBranches(BranchType.Remote);
@@ -162,6 +153,8 @@ namespace GitMore
 
         private void RemoteBranchButtonHandler(object sender, EventArgs e)
         {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
             LogData.Add(new LogInfo { Record = $"Fetching remote branches" });
 
             var branches = GitCleanManager.GetBranches(BranchType.Remote);
@@ -174,6 +167,8 @@ namespace GitMore
 
         private void LocalBranchButtonHandler(object sender, EventArgs e)
         {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
             LogData.Add(new LogInfo { Record = $"Fetching local branches" });
 
             var branches = GitCleanManager.GetBranches(BranchType.Local);
