@@ -10,6 +10,16 @@
         <Style TargetType="{x:Type GridViewColumnHeader}">
             <Setter Property="HorizontalContentAlignment" Value="Left" />
         </Style>
+        <Style x:Key="ForceDeleteVisible" TargetType="Button">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Type}" Value="Local">
+                    <Setter Property="Visibility" Value="Visible" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Type}" Value="Remote">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -23,9 +33,14 @@
                     <GridViewColumn Header="Action">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Click="DeleteBranch">
-                                    <Image Name="DeleteBranchAction" Source="Resources\DeleteIcon.png" Width="15" ToolTip="Delete this branch" Height="15" Cursor="Hand"/>
-                                </Button>
+                                <StackPanel Orientation="Horizontal"  VerticalAlignment="Center">
+                                    <Button Margin="0,0,4,0" Click="DeleteBranch">
+                                        <Image Name="DeleteBranchAction" Source="Resources\DeleteIcon.png" Width="15" ToolTip="Delete this branch" Height="15" Cursor="Hand"/>
+                                    </Button>
+                                    <Button Click="ForceDeleteBranch" Style="{StaticResource ForceDeleteVisible}">
+                                        <Image Name="ForceDeleteBranchAction" Source="Resources\ForceDeleteIcon.png" Width="15" ToolTip="Force Delete this branch" Height="15" Cursor="Hand"/>
+                                    </Button>
+                                </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

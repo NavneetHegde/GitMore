@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.Shell;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 
 namespace GitMore.Core
 {
@@ -34,7 +35,7 @@ namespace GitMore.Core
             return ExtractBranches(type, gitCommand);
         }
 
-        public static string DeleteBranch(GitBranch branch)
+        public static string DeleteBranch(GitBranch branch, bool forceDeleteLocal = false)
         {
             string gitCommand;
             string branchName;
@@ -45,7 +46,11 @@ namespace GitMore.Core
             }
             else
             {
-                gitCommand = GitCommands.GitDeleteLocalBranchCommand;
+                if (forceDeleteLocal)
+                    gitCommand = GitCommands.GitForceDeleteLocalBranchCommand;
+                else
+                    gitCommand = GitCommands.GitDeleteLocalBranchCommand;
+
                 branchName = branch.FullName;
             }
 
@@ -83,7 +88,7 @@ namespace GitMore.Core
                             FullName = branch?.Trim(),
                             Name = branch.Split('/').Last(),
                             RemoteName = string.Join("/", branch.Split('/').SkipWhile(name => name.Trim().Equals("origin")))
-                        });
+                        }); ;
                 }
             }
             return branchesCollection;

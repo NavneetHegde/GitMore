@@ -44,11 +44,28 @@ namespace GitMore
             ThreadHelper.ThrowIfNotOnUIThread();
 
             var LogData = (ObservableCollection<LogInfo>)ListViewLog.DataContext;
-            LogData.Add(new LogInfo { Record = $"Deleting {branchData.Type} branch :: {branchData.FullName}" });
+            LogData.Add(new LogInfo { Record = $"Deleting {branchData.Type} branch begin :: {branchData.FullName}" });
 
             string deleteCommandResult = GitCleanManager.DeleteBranch(branchData);
 
-            LogData.Add(new LogInfo { Record = $"Deleted {branchData.Type} branch :: {deleteCommandResult}" });
+            LogData.Add(new LogInfo { Record = $"Deleted {branchData.Type} branch end :: {deleteCommandResult}" });
+
+            PopulateBranches(branchData.Type);
+        }
+
+        private void ForceDeleteBranch(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var butoonContext = (Button)e.OriginalSource;
+            GitBranch branchData = (GitBranch)butoonContext.DataContext;
+
+            ThreadHelper.ThrowIfNotOnUIThread();
+
+            var LogData = (ObservableCollection<LogInfo>)ListViewLog.DataContext;
+            LogData.Add(new LogInfo { Record = $"Force Deleting {branchData.Type} branch begin :: {branchData.FullName}" });
+
+            string deleteCommandResult = GitCleanManager.DeleteBranch(branchData, true);
+
+            LogData.Add(new LogInfo { Record = $"Force Deleted {branchData.Type} branch end :: {deleteCommandResult}" });
 
             PopulateBranches(branchData.Type);
         }
