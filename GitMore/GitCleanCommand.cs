@@ -146,7 +146,7 @@ namespace GitMore
 
             var branches = GitCleanManager.FetchBranches(BranchType.Remote);
 
-            LogData.Add(new LogInfo { Record = $"Fetched total {branches?.Count} reamote branches" });
+            LogData.Add(new LogInfo { Record = $"Fetched total {branches?.Count} remote branches" });
 
             UpdateList();
         }
@@ -160,7 +160,7 @@ namespace GitMore
             var branches = GitCleanManager.GetBranches(BranchType.Remote);
             BranchesData = branches;
 
-            LogData.Add(new LogInfo { Record = $"Fetched total {branches?.Count} reamote branches" });
+            LogData.Add(new LogInfo { Record = $"Fetched total {branches?.Count} remote branches" });
 
             UpdateList();
         }
