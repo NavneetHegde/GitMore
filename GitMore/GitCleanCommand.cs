@@ -25,7 +25,7 @@ namespace GitMore
         public const uint cmdidWindowsMedia = 0x100;
         public const int cmdidWindowsLocalBranch = 0x132;
         public const int cmdidWindowsRemoteBranch = 0x134;
-        public const int cmdidWindowsFetchBranch = 0x136;
+        public const int cmdidWindowsFetchPruneBranch = 0x136;
         public const int ToolbarID = 0x1000;
 
         public ObservableCollection<GitBranch> BranchesData { get; set; }
@@ -66,9 +66,9 @@ namespace GitMore
                 var menuItemRemoteBranch = new MenuCommand(new EventHandler(RemoteBranchButtonHandler), toolbarRemoteBranchCmdID);
                 commandService.AddCommand(menuItemRemoteBranch);
 
-                CommandID toolbarFetchBranch = new CommandID(new Guid(guidGitMorePackageCmdSet), GitCleanCommand.cmdidWindowsFetchBranch);
-                var menuItemFetchBranch = new MenuCommand(new EventHandler(FetchBranchButtonHandler), toolbarFetchBranch);
-                commandService.AddCommand(menuItemFetchBranch);
+                CommandID toolbarFetchPruneBranch = new CommandID(new Guid(guidGitMorePackageCmdSet), GitCleanCommand.cmdidWindowsFetchPruneBranch);
+                var menuItemFetchPruneBranch = new MenuCommand(new EventHandler(FetchPruneBranchButtonHandler), toolbarFetchPruneBranch);
+                commandService.AddCommand(menuItemFetchPruneBranch);
             }
             BranchesData = new ObservableCollection<GitBranch>();
             LogData = new ObservableCollection<LogInfo>();
@@ -138,13 +138,13 @@ namespace GitMore
             return Path.GetDirectoryName(dte.Solution.FullName);
         }
 
-        private void FetchBranchButtonHandler(object sender, EventArgs e)
+        private void FetchPruneBranchButtonHandler(object sender, EventArgs e)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
 
             LogData.Add(new LogInfo { Record = $"Fetching remote branches for (GIT {GetProjectFolder()})" });
 
-            var branches = GitCleanManager.FetchBranches(BranchType.Remote);
+            var branches = GitCleanManager.FetchPruneBranches(BranchType.Remote);
 
             LogData.Add(new LogInfo { Record = $"Fetched total {branches?.Count} remote branches" });
 

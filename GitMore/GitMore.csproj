@@ -67,7 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\ForceDeleteIcon.png" />
-    <Content Include="Resources\Gitfetch.png" />
+    <Content Include="Resources\GitFetchPrune.png" />
     <Content Include="Resources\Icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
