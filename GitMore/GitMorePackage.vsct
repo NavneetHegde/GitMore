@@ -73,6 +73,7 @@
         <Strings>
           <CommandName>cmdidWindowsLocalBranch</CommandName>
           <ButtonText>Local branches</ButtonText>
+          <ToolTipText>List the local branches</ToolTipText>
         </Strings>
       </Button>
       <Button guid="guidGitMorePackageCmdSet" id="cmdidWindowsRemoteBranch" priority="0x0102" type="Button">
@@ -82,19 +83,20 @@
         <Strings>
           <CommandName>cmdidWindowsRemoteBranch</CommandName>
           <ButtonText>Remote branches</ButtonText>
+          <ToolTipText>List the remote-tracking branches</ToolTipText>
         </Strings>
       </Button>
-      <Button guid="guidGitMorePackageCmdSet" id="cmdidWindowsFetchBranch" priority="0x0103" type="Button">
+      <Button guid="guidGitMorePackageCmdSet" id="cmdidWindowsFetchPruneBranch" priority="0x0103" type="Button">
         <Parent guid="guidGitMorePackageCmdSet" id="ToolbarGroupID"/>
-        <Icon  guid="guidImages3" id="FetchBranchIcon1" />
+        <Icon  guid="guidImages3" id="FetchPruneBranchIcon1" />
         <CommandFlag>IconAndText</CommandFlag>
         <Strings>
-          <CommandName>cmdidWindowsFetchBranch</CommandName>
+          <CommandName>cmdidWindowsFetchPruneBranch</CommandName>
           <ButtonText>Fetch Branch</ButtonText>
+          <ToolTipText>Before fetching, remove any remote-tracking references that no longer exist on the remote.</ToolTipText>
         </Strings>
       </Button>
     </Buttons>
-
     <!--The bitmaps section is used to define the bitmaps that are used for the commands.-->
     <Bitmaps>
       <!--  The bitmap id is defined in a way that is a little bit different from the others:
@@ -105,7 +107,7 @@
       <Bitmap guid="guidImages" href="Resources\GitCleanCommand.png" usedList="GitCleanCommand1"/>
       <Bitmap guid="guidImages1" href="Resources\LocalBranchIcon.png" usedList="LocalBranchIcon1"/>
       <Bitmap guid="guidImages2" href="Resources\RemoreBranchIcon.png" usedList="RemoteBranchIcon1"/>
-      <Bitmap guid="guidImages3" href="Resources\Gitfetch.png" usedList="FetchBranchIcon1"/>
+      <Bitmap guid="guidImages3" href="Resources\GitFetchPrune.png" usedList="FetchPruneBranchIcon1"/>
     </Bitmaps>
   </Commands>
 
@@ -121,7 +123,7 @@
       <IDSymbol name="cmdidWindowsMedia" value="0x0100" />
       <IDSymbol name="cmdidWindowsLocalBranch" value="0x132" />
       <IDSymbol name="cmdidWindowsRemoteBranch" value="0x134" />
-      <IDSymbol name="cmdidWindowsFetchBranch" value="0x136" />
+      <IDSymbol name="cmdidWindowsFetchPruneBranch" value="0x136" />
     </GuidSymbol>
 
     <GuidSymbol name="guidImages" value="{24819d1b-b082-48c2-a8c2-8b500784cc74}" >
@@ -134,7 +136,7 @@
       <IDSymbol name="RemoteBranchIcon1" value="1" />
     </GuidSymbol>
     <GuidSymbol name="guidImages3" value="{63E01BEF-EDD9-430F-BE11-FE8E47EA07D2}" >
-      <IDSymbol name="FetchBranchIcon1" value="1" />
+      <IDSymbol name="FetchPruneBranchIcon1" value="1" />
     </GuidSymbol>
   </Symbols>
 </CommandTable>
