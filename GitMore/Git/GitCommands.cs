@@ -12,7 +12,7 @@ namespace GitMore.Git
 {
     public static class GitCommands
     {
-        public static string GitFetchCommand = "fetch ";
+        public static string GitFetchPruneCommand = "fetch --prune ";
 
         public static string GitGetLocalBranchCommand = "branch ";
         public static string GitGetRemoteBranchCommand = "branch -r ";
@@ -40,6 +40,11 @@ namespace GitMore.Git
                 Arguments = arguments,
                 WorkingDirectory = workingDir
             };
+        }
+
+        internal static string GetGitDeleteRemoteBranchCommand(string remoteRoot)
+        {
+            return $"push {remoteRoot} --delete ";
         }
 
         public static string GetGitExePath()

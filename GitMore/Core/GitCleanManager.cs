@@ -26,12 +26,12 @@ namespace GitMore.Core
             return ExtractBranches(type, gitCommand);
         }
 
-        public static ObservableCollection<GitBranch> FetchBranches(BranchType type)
+        public static ObservableCollection<GitBranch> FetchPruneBranches(BranchType type)
         {
 
             ThreadHelper.ThrowIfNotOnUIThread();
 
-            string gitCommand = GitCommands.GitFetchCommand;
+            string gitCommand = GitCommands.GitFetchPruneCommand;
             return ExtractBranches(type, gitCommand);
         }
 
@@ -41,7 +41,7 @@ namespace GitMore.Core
             string branchName;
             if (branch.Type == BranchType.Remote)
             {
-                gitCommand = GitCommands.GitDeleteRemoteBranchCommand;
+                gitCommand = GitCommands.GetGitDeleteRemoteBranchCommand(branch.RemoteRoot);
                 branchName = branch.RemoteName;
             }
             else
@@ -67,8 +67,8 @@ namespace GitMore.Core
             ThreadHelper.ThrowIfNotOnUIThread();
 
             var branchesCollection = new ObservableCollection<GitBranch>();
-            string beanchesCommand = GitCommands.RunGitExWait(gitCommand);
-            string[] branches = beanchesCommand.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+            string branchesCommand = GitCommands.RunGitExWait(gitCommand);
+            string[] branches = branchesCommand.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
 
             if (branches?.Length > 0)
             {
@@ -87,8 +87,9 @@ namespace GitMore.Core
                             DisplayName = $"{branchData?.ToString().Trim()}",
                             FullName = branch?.Trim(),
                             Name = branch.Split('/').Last(),
+                            RemoteRoot = branch.Split('/').First().Trim(),
                             RemoteName = string.Join("/", branch.Split('/').SkipWhile(name => name.Trim().Equals("origin")))
-                        }); ;
+                        });
                 }
             }
             return branchesCollection;
