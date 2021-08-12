@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="B413D4CF-1EFA-4950-9562-5A1B729CD2D0" Version="1.1" Language="en-US" Publisher="Navneet Hegde" />
+    <Identity Id="B413D4CF-1EFA-4950-9562-5A1B729CD2D0" Version="1.2" Language="en-US" Publisher="Navneet Hegde" />
     <DisplayName>Git More</DisplayName>
     <Description xml:space="preserve">Simplfying GIT functionality.</Description>
     <Icon>Resources\Icon.png</Icon>
