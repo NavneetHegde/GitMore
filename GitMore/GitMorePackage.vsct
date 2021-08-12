@@ -92,7 +92,7 @@
         <CommandFlag>IconAndText</CommandFlag>
         <Strings>
           <CommandName>cmdidWindowsFetchPruneBranch</CommandName>
-          <ButtonText>Fetch Branch</ButtonText>
+          <ButtonText>Fetch Prune</ButtonText>
           <ToolTipText>Before fetching, remove any remote-tracking references that no longer exist on the remote.</ToolTipText>
         </Strings>
       </Button>
