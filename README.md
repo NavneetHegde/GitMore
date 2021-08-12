@@ -2,13 +2,13 @@
 Simplifying GIT functionality.
 
 ## Feature
-- Git Clean : Dedicated Toolwindow to delete branch on local and remote.
-
-        
-    ![image](https://user-images.githubusercontent.com/6188628/122986839-f3327b80-d36d-11eb-9bd5-944e4c8c0143.png)
+- Git Clean : Dedicated ToolWindow to delete branch on local and remote.
+- Placed under View -> Other Windows -> Git Clean
 
 
-    
+![image](https://user-images.githubusercontent.com/6188628/129263262-f0fa93fc-caef-4844-a243-29629c9949bd.png)
+
+
 
 ## Requirements
   Works with GIT installed for Visual Studio 2019
@@ -20,4 +20,9 @@ Simplifying GIT functionality.
   1.0.0
   -   Initial release : GIT Clean feature
 
+  1.1.0
+  -   Fixed bug to select correct git repo
+
+  1.2.0
+  -   Added Local force delete and Remote Fetch prune feature
 
