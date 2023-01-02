@@ -1,5 +1,5 @@
 # GitMore
-Simplifying GIT functionality.
+Visual Studio extensibility tool to simplify GIT functionality.
 
 ## Feature
 - Git Clean : Dedicated ToolWindow to delete branch on local and remote.
