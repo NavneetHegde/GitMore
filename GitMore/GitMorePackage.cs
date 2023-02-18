@@ -26,7 +26,7 @@ namespace GitMore
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
     [Guid(GitMorePackage.PackageGuidString)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
-    [ProvideToolWindow(typeof(GitClean), Style = VsDockStyle.Tabbed,
+    [ProvideToolWindow(typeof(GitMorePane), Style = VsDockStyle.Tabbed,
         Window = "3ae79031-e1bc-11d0-8f78-00a0c9110057")]
     public sealed class GitMorePackage : AsyncPackage
     {
@@ -49,7 +49,7 @@ namespace GitMore
             // When initialized asynchronously, the current thread may be a background thread at this point.
             // Do any initialization that requires the UI thread after switching to the UI thread.
             await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-            await GitCleanCommand.InitializeAsync(this);
+            await GitMoreCommand.InitializeAsync(this);
         }
 
         #endregion

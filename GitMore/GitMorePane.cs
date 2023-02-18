@@ -18,22 +18,22 @@ namespace GitMore
     /// </para>
     /// </remarks>
     [Guid("720cda5b-8e65-4b64-985f-d038b859344d")]
-    public class GitClean : ToolWindowPane
+    public class GitMorePane : ToolWindowPane
     {
-        public GitCleanControl control;
+        public GitMoreControl control;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GitClean"/> class.
+        /// Initializes a new instance of the <see cref="GitMorePane"/> class.
         /// </summary>
-        public GitClean() : base(null)
+        public GitMorePane() : base(null)
         {
-            this.Caption = "Git Clean";
+            this.Caption = "Git More";
 
             // This is the user control hosted by the tool window; Note that, even if this class implements IDisposable,
             // we are not calling Dispose on this object. This is because ToolWindowPane calls Dispose on
             // the object returned by the Content property.
-            this.Content = new GitCleanControl();
-            this.ToolBar = new CommandID(new Guid(GitCleanCommand.guidGitMorePackageCmdSet), GitCleanCommand.ToolbarID);
+            this.Content = new GitMoreControl();
+            this.ToolBar = new CommandID(new Guid(GitMoreCommand.guidGitMorePackageCmdSet), GitMoreCommand.ToolbarID);
             this.ToolBarLocation = (int)VSTWT_LOCATION.VSTWT_TOP;
         }
     }

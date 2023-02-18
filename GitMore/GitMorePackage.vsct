@@ -59,11 +59,11 @@
               <CommandFlag>DefaultInvisible</CommandFlag>
               <CommandFlag>DynamicVisibility</CommandFlag>
           If you do not want an image next to your command, remove the Icon node /> -->
-      <Button guid="guidGitMorePackageCmdSet" id="GitCleanCommandId" priority="0x0100" type="Button">
+      <Button guid="guidGitMorePackageCmdSet" id="GitMoreCommandId" priority="0x0100" type="Button">
         <Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1"/>
-        <Icon guid="guidImages" id="GitCleanCommand1" />
+        <Icon guid="guidImages" id="GitMoreCommand1" />
         <Strings>
-          <ButtonText>Git Clean</ButtonText>
+          <ButtonText>Git More</ButtonText>
         </Strings>
       </Button>
       <Button guid="guidGitMorePackageCmdSet" id="cmdidWindowsLocalBranch" priority="0x0101" type="Button">
@@ -104,7 +104,7 @@
             bitmap strip containing the bitmaps and then there are the numeric ids of the elements used
             inside a button definition. An important aspect of this declaration is that the element id
             must be the actual index (1-based) of the bitmap inside the bitmap strip. -->
-      <Bitmap guid="guidImages" href="Resources\GitCleanCommand.png" usedList="GitCleanCommand1"/>
+      <Bitmap guid="guidImages" href="Resources\GitMoreCommand.png" usedList="GitMoreCommand1"/>
       <Bitmap guid="guidImages1" href="Resources\LocalBranchIcon.png" usedList="LocalBranchIcon1"/>
       <Bitmap guid="guidImages2" href="Resources\RemoreBranchIcon.png" usedList="RemoteBranchIcon1"/>
       <Bitmap guid="guidImages3" href="Resources\GitFetchPrune.png" usedList="FetchPruneBranchIcon1"/>
@@ -117,7 +117,7 @@
 
     <!-- This is the guid used to group the menu commands together -->
     <GuidSymbol name="guidGitMorePackageCmdSet" value="{0b7b7b52-23d2-44eb-8b4b-174873e3b0de}">
-      <IDSymbol name="GitCleanCommandId" value="0x0100" />
+      <IDSymbol name="GitMoreCommandId" value="0x0100" />
       <IDSymbol name="ToolbarID" value="0x1000" />
       <IDSymbol name="ToolbarGroupID" value="0x1001" />
       <IDSymbol name="cmdidWindowsMedia" value="0x0100" />
@@ -127,7 +127,7 @@
     </GuidSymbol>
 
     <GuidSymbol name="guidImages" value="{24819d1b-b082-48c2-a8c2-8b500784cc74}" >
-      <IDSymbol name="GitCleanCommand1" value="1" />
+      <IDSymbol name="GitMoreCommand1" value="1" />
     </GuidSymbol>
     <GuidSymbol name="guidImages1" value="{00B07549-C59B-408D-8867-DB41148C253C}" >
       <IDSymbol name="LocalBranchIcon1" value="1" />
