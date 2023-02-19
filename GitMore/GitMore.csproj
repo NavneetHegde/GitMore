@@ -48,11 +48,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Core\GitMoreManager.cs" />
-    <Compile Include="GitMorePane.cs" />
-    <Compile Include="GitMoreCommand.cs" />
-    <Compile Include="GitMoreControl.xaml.cs">
-      <DependentUpon>GitMoreControl.xaml</DependentUpon>
+    <Compile Include="Core\GitCleanManager.cs" />
+    <Compile Include="GitClean.cs" />
+    <Compile Include="GitCleanCommand.cs" />
+    <Compile Include="GitCleanControl.xaml.cs">
+      <DependentUpon>GitCleanControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Git\GitCommands.cs" />
     <Compile Include="Model\GitBranch.cs" />
@@ -73,8 +73,8 @@
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Resource Include="Resources\Icon_inverse.png" />
-    <Resource Include="Resources\GitMoreCommand.png" />
-    <Resource Include="Resources\GitMoreCommand_inverse.png" />
+    <Resource Include="Resources\GitCleanCommand.png" />
+    <Resource Include="Resources\GitCleanCommand_inverse.png" />
     <Resource Include="Resources\DeleteIcon.png" />
     <Resource Include="Resources\LocalBranchIcon.png" />
     <Resource Include="Resources\RemoreBranchIcon.png" />
@@ -99,13 +99,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.SDK" Version="16.0.206" ExcludeAssets="runtime" />
-    <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="16.11.69">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
+    <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="16.9.2017" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="GitMoreControl.xaml">
+    <Page Include="GitCleanControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

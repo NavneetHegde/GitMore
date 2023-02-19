@@ -14,7 +14,7 @@ namespace GitMore
     /// <summary>
     /// Command handler
     /// </summary>
-    internal sealed class GitMoreCommand
+    internal sealed class GitCleanCommand
     {
         /// <summary>
         /// Command ID.
@@ -42,12 +42,12 @@ namespace GitMore
         private readonly AsyncPackage package;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GitMoreCommand"/> class.
+        /// Initializes a new instance of the <see cref="GitCleanCommand"/> class.
         /// Adds our command handlers for menu (commands must exist in the command table file)
         /// </summary>
         /// <param name="package">Owner package, not null.</param>
         /// <param name="commandService">Command service to add command to, not null.</param>
-        private GitMoreCommand(AsyncPackage package, OleMenuCommandService commandService)
+        private GitCleanCommand(AsyncPackage package, OleMenuCommandService commandService)
         {
             this.package = package ?? throw new ArgumentNullException(nameof(package));
             commandService = commandService ?? throw new ArgumentNullException(nameof(commandService));
@@ -58,15 +58,15 @@ namespace GitMore
                 var menuItem = new MenuCommand(this.Execute, menuCommandID);
                 commandService.AddCommand(menuItem);
 
-                var toolbarLocalBranchCmdID = new CommandID(new Guid(guidGitMorePackageCmdSet), GitMoreCommand.cmdidWindowsLocalBranch);
+                var toolbarLocalBranchCmdID = new CommandID(new Guid(guidGitMorePackageCmdSet), GitCleanCommand.cmdidWindowsLocalBranch);
                 var menuItemLocalBranch = new MenuCommand(new EventHandler(LocalBranchButtonHandler), toolbarLocalBranchCmdID);
                 commandService.AddCommand(menuItemLocalBranch);
 
-                var toolbarRemoteBranchCmdID = new CommandID(new Guid(guidGitMorePackageCmdSet), GitMoreCommand.cmdidWindowsRemoteBranch);
+                var toolbarRemoteBranchCmdID = new CommandID(new Guid(guidGitMorePackageCmdSet), GitCleanCommand.cmdidWindowsRemoteBranch);
                 var menuItemRemoteBranch = new MenuCommand(new EventHandler(RemoteBranchButtonHandler), toolbarRemoteBranchCmdID);
                 commandService.AddCommand(menuItemRemoteBranch);
 
-                CommandID toolbarFetchPruneBranch = new CommandID(new Guid(guidGitMorePackageCmdSet), GitMoreCommand.cmdidWindowsFetchPruneBranch);
+                CommandID toolbarFetchPruneBranch = new CommandID(new Guid(guidGitMorePackageCmdSet), GitCleanCommand.cmdidWindowsFetchPruneBranch);
                 var menuItemFetchPruneBranch = new MenuCommand(new EventHandler(FetchPruneBranchButtonHandler), toolbarFetchPruneBranch);
                 commandService.AddCommand(menuItemFetchPruneBranch);
             }
@@ -77,7 +77,7 @@ namespace GitMore
         /// <summary>
         /// Gets the instance of the command.
         /// </summary>
-        public static GitMoreCommand Instance
+        public static GitCleanCommand Instance
         {
             get;
             private set;
@@ -95,12 +95,12 @@ namespace GitMore
         /// <param name="package">Owner package, not null.</param>
         public static async Task InitializeAsync(AsyncPackage package)
         {
-            // Switch to the main thread - the call to AddCommand in GitMoreCommand's constructor requires
+            // Switch to the main thread - the call to AddCommand in GitCleanCommand's constructor requires
             // the UI thread.
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync(package.DisposalToken);
 
             OleMenuCommandService commandService = await package.GetServiceAsync(typeof(IMenuCommandService)) as OleMenuCommandService;
-            Instance = new GitMoreCommand(package, commandService);
+            Instance = new GitCleanCommand(package, commandService);
 
         }
 
@@ -116,7 +116,7 @@ namespace GitMore
             // Get the instance number 0 of this tool window. This window is single instance so this instance
             // is actually the only one.
             // The last flag is set to true so that if the tool window does not exists it will be created.
-            ToolWindowPane window = this.package.FindToolWindow(typeof(GitMorePane), 0, true);
+            ToolWindowPane window = this.package.FindToolWindow(typeof(GitClean), 0, true);
             if ((null == window) || (null == window.Frame))
             {
                 throw new NotSupportedException("Cannot create tool window");
@@ -144,7 +144,7 @@ namespace GitMore
 
             LogData.Add(new LogInfo { Record = $"Fetching remote branches for (GIT {GetProjectFolder()})" });
 
-            var branches = GitMoreManager.FetchPruneBranches(BranchType.Remote);
+            var branches = GitCleanManager.FetchPruneBranches(BranchType.Remote);
 
             LogData.Add(new LogInfo { Record = $"Fetched total {branches?.Count} remote branches" });
 
@@ -157,7 +157,7 @@ namespace GitMore
 
             LogData.Add(new LogInfo { Record = $"Fetching remote branches" });
 
-            var branches = GitMoreManager.GetBranches(BranchType.Remote);
+            var branches = GitCleanManager.GetBranches(BranchType.Remote);
             BranchesData = branches;
 
             LogData.Add(new LogInfo { Record = $"Fetched total {branches?.Count} remote branches" });
@@ -171,7 +171,7 @@ namespace GitMore
 
             LogData.Add(new LogInfo { Record = $"Fetching local branches" });
 
-            var branches = GitMoreManager.GetBranches(BranchType.Local);
+            var branches = GitCleanManager.GetBranches(BranchType.Local);
             BranchesData = branches;
 
             LogData.Add(new LogInfo { Record = $"Fetched total {branches?.Count} local branches" });
@@ -181,9 +181,9 @@ namespace GitMore
 
         private void UpdateList()
         {
-            ToolWindowPane window = this.package.FindToolWindow(typeof(GitMorePane), 0, true);
+            ToolWindowPane window = this.package.FindToolWindow(typeof(GitClean), 0, true);
 
-            GitMoreControl control = (GitMoreControl)window.Content;
+            GitCleanControl control = (GitCleanControl)window.Content;
             control.ListViewBranches.DataContext = BranchesData;
             control.ListViewLog.DataContext = LogData;
         }

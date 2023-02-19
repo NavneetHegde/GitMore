@@ -7,14 +7,14 @@ using System.Windows.Controls;
 namespace GitMore
 {
     /// <summary>
-    /// Interaction logic for GitMoreControl.
+    /// Interaction logic for GitCleanControl.
     /// </summary>
-    public partial class GitMoreControl : UserControl
+    public partial class GitCleanControl : UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GitMoreControl"/> class.
+        /// Initializes a new instance of the <see cref="GitCleanControl"/> class.
         /// </summary>
-        public GitMoreControl()
+        public GitCleanControl()
         {
             this.InitializeComponent();
         }
@@ -29,7 +29,7 @@ namespace GitMore
 
             ThreadHelper.ThrowIfNotOnUIThread();
 
-            var branches = GitMoreManager.GetBranches(type);
+            var branches = GitCleanManager.GetBranches(type);
             BranchesData = branches;
 
             LogData.Add(new LogInfo { Record = $"Fetched total {branches?.Count} {type} branches" });
@@ -46,7 +46,7 @@ namespace GitMore
             var LogData = (ObservableCollection<LogInfo>)ListViewLog.DataContext;
             LogData.Add(new LogInfo { Record = $"Deleting {branchData.Type} branch begin :: {branchData.FullName}" });
 
-            string deleteCommandResult = GitMoreManager.DeleteBranch(branchData);
+            string deleteCommandResult = GitCleanManager.DeleteBranch(branchData);
 
             LogData.Add(new LogInfo { Record = $"Deleted {branchData.Type} branch end :: {deleteCommandResult}" });
 
@@ -63,30 +63,11 @@ namespace GitMore
             var LogData = (ObservableCollection<LogInfo>)ListViewLog.DataContext;
             LogData.Add(new LogInfo { Record = $"Force Deleting {branchData.Type} branch begin :: {branchData.FullName}" });
 
-            string deleteCommandResult = GitMoreManager.DeleteBranch(branchData, true);
+            string deleteCommandResult = GitCleanManager.DeleteBranch(branchData, true);
 
             LogData.Add(new LogInfo { Record = $"Force Deleted {branchData.Type} branch end :: {deleteCommandResult}" });
 
             PopulateBranches(branchData.Type);
-        }
-
-        private void MenuItem_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            var butoonContext = (MenuItem)e.OriginalSource;
-            GitBranch branchData = (GitBranch)butoonContext.CommandParameter;
-
-            ThreadHelper.ThrowIfNotOnUIThread();
-
-            var LogData = (ObservableCollection<LogInfo>)ListViewLog.DataContext;
-            LogData.Add(new LogInfo { Record = $"Checkout {branchData.Type} branch begin :: {branchData.FullName}" });
-
-            string checkoutCommandResult = GitMoreManager.CheckoutBranch(branchData);
-
-
-            LogData.Add(new LogInfo { Record = $"Checkout {branchData.Type} branch end :: {checkoutCommandResult}" });
-
-            PopulateBranches(branchData.Type);
-
         }
     }
 
