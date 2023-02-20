@@ -21,6 +21,8 @@ namespace GitMore.Git
         public static string GitForceDeleteLocalBranchCommand = "branch -D ";
 
         public static string GitDeleteRemoteBranchCommand = "push origin --delete ";
+        public static string GitCheckoutCommand = "checkout -B ";
+
 
         public static string VS_WHERE_PATH = $@"\Microsoft Visual Studio\Installer";
 

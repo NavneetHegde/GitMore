@@ -4,14 +4,13 @@ using Microsoft.VisualStudio.Shell;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows;
 
 namespace GitMore.Core
 {
     /// <summary>
     /// 
     /// </summary>
-    public static class GitCleanManager
+    public static class GitMoreManager
     {
         public static ObservableCollection<GitBranch> GetBranches(BranchType type)
         {
@@ -57,6 +56,24 @@ namespace GitMore.Core
 
             ThreadHelper.ThrowIfNotOnUIThread();
             return GitCommands.RunGitExWait($"{gitCommand} {branchName}");
+        }
+
+        public static string CheckoutBranch(GitBranch branch)
+        {
+            string gitCommand;
+            string branchName;
+
+            gitCommand = GitCommands.GitCheckoutCommand;
+            branchName = branch.FullName;
+
+            string commandString = "";
+            if (branch.Type == BranchType.Remote)
+                commandString = $"{gitCommand} {branch.RemoteName} {branchName}";
+            else
+                commandString = $"{gitCommand} {branchName}";
+
+            ThreadHelper.ThrowIfNotOnUIThread();
+            return GitCommands.RunGitExWait(commandString);
         }
 
         #region Private

@@ -1,29 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-  <!--  This is the file that defines the actual layout and type of the commands.
+	<!--  This is the file that defines the actual layout and type of the commands.
         It is divided in different sections (e.g. command definition, command
         placement, ...), with each defining a specific set of properties.
         See the comment before each section for more details about how to
         use it. -->
 
-  <!--  The VSCT compiler (the tool that translates this file into the binary
+	<!--  The VSCT compiler (the tool that translates this file into the binary
         format that VisualStudio will consume) has the ability to run a preprocessor
         on the vsct file; this preprocessor is (usually) the C++ preprocessor, so
         it is possible to define includes and macros with the same syntax used
         in C++ files. Using this ability of the compiler here, we include some files
         defining some of the constants that we will use inside the file. -->
 
-  <!--This is the file that defines the IDs for all the commands exposed by VisualStudio. -->
-  <Extern href="stdidcmd.h"/>
+	<!--This is the file that defines the IDs for all the commands exposed by VisualStudio. -->
+	<Extern href="stdidcmd.h"/>
 
-  <!--This header contains the command ids for the menus provided by the shell. -->
-  <Extern href="vsshlids.h"/>
+	<!--This header contains the command ids for the menus provided by the shell. -->
+	<Extern href="vsshlids.h"/>
 
-  <!--The Commands section is where commands, menus, and menu groups are defined.
+	<!--The Commands section is where commands, menus, and menu groups are defined.
       This section uses a Guid to identify the package that provides the command defined inside it. -->
-  <Commands package="guidGitMorePackage">
-    <!-- Inside this section we have different sub-sections: one for the menus, another
+	<Commands package="guidGitMorePackage">
+		<!-- Inside this section we have different sub-sections: one for the menus, another
     for the menu groups, one for the buttons (the actual commands), one for the combos
     and the last one for the bitmaps used. Each element is identified by a command id that
     is a unique pair of guid and numeric identifier; the guid part of the identifier is usually
@@ -31,112 +31,112 @@
     group; your package should define its own command set in order to avoid collisions
     with command ids defined by other packages. -->
 
-    <!--Menus section. -->
-    <Menus>
-      <Menu guid="guidGitMorePackageCmdSet" id="ToolbarID" priority="0x0000" type="ToolWindowToolbar">
-        <Parent guid="guidGitMorePackageCmdSet" id="ToolbarID" />
-        <Strings>
-          <ButtonText>Tool Window Toolbar</ButtonText>
-          <CommandName>Tool Window Toolbar</CommandName>
-        </Strings>
-      </Menu>
-    </Menus>
+		<!--Menus section. -->
+		<Menus>
+			<Menu guid="guidGitMorePackageCmdSet" id="ToolbarID" priority="0x0000" type="ToolWindowToolbar">
+				<Parent guid="guidGitMorePackageCmdSet" id="ToolbarID" />
+				<Strings>
+					<ButtonText>Tool Window Toolbar</ButtonText>
+					<CommandName>Tool Window Toolbar</CommandName>
+				</Strings>
+			</Menu>
+		</Menus>
 
-    <Groups>
-      <Group guid="guidGitMorePackageCmdSet" id="ToolbarGroupID" priority="0x0000">
-        <Parent guid="guidGitMorePackageCmdSet" id="ToolbarID" />
-      </Group>
-    </Groups>
+		<Groups>
+			<Group guid="guidGitMorePackageCmdSet" id="ToolbarGroupID" priority="0x0000">
+				<Parent guid="guidGitMorePackageCmdSet" id="ToolbarID" />
+			</Group>
+		</Groups>
 
-    <!--Buttons section. -->
-    <!--This section defines the elements the user can interact with, like a menu command or a button
+		<!--Buttons section. -->
+		<!--This section defines the elements the user can interact with, like a menu command or a button
         or combo box in a toolbar. -->
-    <Buttons>
-      <!--To define a menu group you have to specify its ID, the parent menu and its display priority.
+		<Buttons>
+			<!--To define a menu group you have to specify its ID, the parent menu and its display priority.
           The command is visible and enabled by default. If you need to change the visibility, status, etc, you can use
           the CommandFlag node.
           You can add more than one CommandFlag node e.g.:
               <CommandFlag>DefaultInvisible</CommandFlag>
               <CommandFlag>DynamicVisibility</CommandFlag>
           If you do not want an image next to your command, remove the Icon node /> -->
-      <Button guid="guidGitMorePackageCmdSet" id="GitCleanCommandId" priority="0x0100" type="Button">
-        <Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1"/>
-        <Icon guid="guidImages" id="GitCleanCommand1" />
-        <Strings>
-          <ButtonText>Git Clean</ButtonText>
-        </Strings>
-      </Button>
-      <Button guid="guidGitMorePackageCmdSet" id="cmdidWindowsLocalBranch" priority="0x0101" type="Button">
-        <Parent guid="guidGitMorePackageCmdSet" id="ToolbarGroupID"/>
-        <Icon guid="guidImages1" id="LocalBranchIcon1" />
-        <CommandFlag>IconAndText</CommandFlag>
-        <Strings>
-          <CommandName>cmdidWindowsLocalBranch</CommandName>
-          <ButtonText>Local branches</ButtonText>
-          <ToolTipText>List the local branches</ToolTipText>
-        </Strings>
-      </Button>
-      <Button guid="guidGitMorePackageCmdSet" id="cmdidWindowsRemoteBranch" priority="0x0102" type="Button">
-        <Parent guid="guidGitMorePackageCmdSet" id="ToolbarGroupID"/>
-        <Icon guid="guidImages2" id="RemoteBranchIcon1" />
-        <CommandFlag>IconAndText</CommandFlag>
-        <Strings>
-          <CommandName>cmdidWindowsRemoteBranch</CommandName>
-          <ButtonText>Remote branches</ButtonText>
-          <ToolTipText>List the remote-tracking branches</ToolTipText>
-        </Strings>
-      </Button>
-      <Button guid="guidGitMorePackageCmdSet" id="cmdidWindowsFetchPruneBranch" priority="0x0103" type="Button">
-        <Parent guid="guidGitMorePackageCmdSet" id="ToolbarGroupID"/>
-        <Icon  guid="guidImages3" id="FetchPruneBranchIcon1" />
-        <CommandFlag>IconAndText</CommandFlag>
-        <Strings>
-          <CommandName>cmdidWindowsFetchPruneBranch</CommandName>
-          <ButtonText>Fetch Prune</ButtonText>
-          <ToolTipText>Before fetching, remove any remote-tracking references that no longer exist on the remote.</ToolTipText>
-        </Strings>
-      </Button>
-    </Buttons>
-    <!--The bitmaps section is used to define the bitmaps that are used for the commands.-->
-    <Bitmaps>
-      <!--  The bitmap id is defined in a way that is a little bit different from the others:
+			<Button guid="guidGitMorePackageCmdSet" id="GitMoreCommandId" priority="0x0100" type="Button">
+				<Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1"/>
+				<Icon guid="guidImages" id="GitMoreCommand1" />
+				<Strings>
+					<ButtonText>Git More</ButtonText>
+				</Strings>
+			</Button>
+			<Button guid="guidGitMorePackageCmdSet" id="cmdidWindowsLocalBranch" priority="0x0101" type="Button">
+				<Parent guid="guidGitMorePackageCmdSet" id="ToolbarGroupID"/>
+				<Icon guid="guidImages1" id="LocalBranchIcon1" />
+				<CommandFlag>IconAndText</CommandFlag>
+				<Strings>
+					<CommandName>cmdidWindowsLocalBranch</CommandName>
+					<ButtonText>Local branches</ButtonText>
+					<ToolTipText>List the local branches</ToolTipText>
+				</Strings>
+			</Button>
+			<Button guid="guidGitMorePackageCmdSet" id="cmdidWindowsRemoteBranch" priority="0x0102" type="Button">
+				<Parent guid="guidGitMorePackageCmdSet" id="ToolbarGroupID"/>
+				<Icon guid="guidImages2" id="RemoteBranchIcon1" />
+				<CommandFlag>IconAndText</CommandFlag>
+				<Strings>
+					<CommandName>cmdidWindowsRemoteBranch</CommandName>
+					<ButtonText>Remote branches</ButtonText>
+					<ToolTipText>List the remote-tracking branches</ToolTipText>
+				</Strings>
+			</Button>
+			<Button guid="guidGitMorePackageCmdSet" id="cmdidWindowsFetchPruneBranch" priority="0x0103" type="Button">
+				<Parent guid="guidGitMorePackageCmdSet" id="ToolbarGroupID"/>
+				<Icon  guid="guidImages3" id="FetchPruneBranchIcon1" />
+				<CommandFlag>IconAndText</CommandFlag>
+				<Strings>
+					<CommandName>cmdidWindowsFetchPruneBranch</CommandName>
+					<ButtonText>Fetch Prune</ButtonText>
+					<ToolTipText>Before fetching, remove any remote-tracking references that no longer exist on the remote.</ToolTipText>
+				</Strings>
+			</Button>
+		</Buttons>
+		<!--The bitmaps section is used to define the bitmaps that are used for the commands.-->
+		<Bitmaps>
+			<!--  The bitmap id is defined in a way that is a little bit different from the others:
             the declaration starts with a guid for the bitmap strip, then there is the resource id of the
             bitmap strip containing the bitmaps and then there are the numeric ids of the elements used
             inside a button definition. An important aspect of this declaration is that the element id
             must be the actual index (1-based) of the bitmap inside the bitmap strip. -->
-      <Bitmap guid="guidImages" href="Resources\GitCleanCommand.png" usedList="GitCleanCommand1"/>
-      <Bitmap guid="guidImages1" href="Resources\LocalBranchIcon.png" usedList="LocalBranchIcon1"/>
-      <Bitmap guid="guidImages2" href="Resources\RemoreBranchIcon.png" usedList="RemoteBranchIcon1"/>
-      <Bitmap guid="guidImages3" href="Resources\GitFetchPrune.png" usedList="FetchPruneBranchIcon1"/>
-    </Bitmaps>
-  </Commands>
+			<Bitmap guid="guidImages" href="Resources\GitMoreCommand.png" usedList="GitMoreCommand1"/>
+			<Bitmap guid="guidImages1" href="Resources\LocalBranchIcon.png" usedList="LocalBranchIcon1"/>
+			<Bitmap guid="guidImages2" href="Resources\RemoreBranchIcon.png" usedList="RemoteBranchIcon1"/>
+			<Bitmap guid="guidImages3" href="Resources\GitFetchPrune.png" usedList="FetchPruneBranchIcon1"/>
+		</Bitmaps>
+	</Commands>
 
-  <Symbols>
-    <!-- This is the package guid. -->
-    <GuidSymbol name="guidGitMorePackage" value="{82337263-30cd-4ab8-87f2-79fea5b6316f}" />
+	<Symbols>
+		<!-- This is the package guid. -->
+		<GuidSymbol name="guidGitMorePackage" value="{82337263-30cd-4ab8-87f2-79fea5b6316f}" />
 
-    <!-- This is the guid used to group the menu commands together -->
-    <GuidSymbol name="guidGitMorePackageCmdSet" value="{0b7b7b52-23d2-44eb-8b4b-174873e3b0de}">
-      <IDSymbol name="GitCleanCommandId" value="0x0100" />
-      <IDSymbol name="ToolbarID" value="0x1000" />
-      <IDSymbol name="ToolbarGroupID" value="0x1001" />
-      <IDSymbol name="cmdidWindowsMedia" value="0x0100" />
-      <IDSymbol name="cmdidWindowsLocalBranch" value="0x132" />
-      <IDSymbol name="cmdidWindowsRemoteBranch" value="0x134" />
-      <IDSymbol name="cmdidWindowsFetchPruneBranch" value="0x136" />
-    </GuidSymbol>
+		<!-- This is the guid used to group the menu commands together -->
+		<GuidSymbol name="guidGitMorePackageCmdSet" value="{0b7b7b52-23d2-44eb-8b4b-174873e3b0de}">
+			<IDSymbol name="GitMoreCommandId" value="0x0100" />
+			<IDSymbol name="ToolbarID" value="0x1000" />
+			<IDSymbol name="ToolbarGroupID" value="0x1001" />
+			<IDSymbol name="cmdidWindowsMedia" value="0x0100" />
+			<IDSymbol name="cmdidWindowsLocalBranch" value="0x132" />
+			<IDSymbol name="cmdidWindowsRemoteBranch" value="0x134" />
+			<IDSymbol name="cmdidWindowsFetchPruneBranch" value="0x136" />
+		</GuidSymbol>
 
-    <GuidSymbol name="guidImages" value="{24819d1b-b082-48c2-a8c2-8b500784cc74}" >
-      <IDSymbol name="GitCleanCommand1" value="1" />
-    </GuidSymbol>
-    <GuidSymbol name="guidImages1" value="{00B07549-C59B-408D-8867-DB41148C253C}" >
-      <IDSymbol name="LocalBranchIcon1" value="1" />
-    </GuidSymbol>
-    <GuidSymbol name="guidImages2" value="{C3A82292-B85F-43E5-8FFD-9B949BDA6C29}" >
-      <IDSymbol name="RemoteBranchIcon1" value="1" />
-    </GuidSymbol>
-    <GuidSymbol name="guidImages3" value="{63E01BEF-EDD9-430F-BE11-FE8E47EA07D2}" >
-      <IDSymbol name="FetchPruneBranchIcon1" value="1" />
-    </GuidSymbol>
-  </Symbols>
+		<GuidSymbol name="guidImages" value="{24819d1b-b082-48c2-a8c2-8b500784cc74}" >
+			<IDSymbol name="GitMoreCommand1" value="1" />
+		</GuidSymbol>
+		<GuidSymbol name="guidImages1" value="{00B07549-C59B-408D-8867-DB41148C253C}" >
+			<IDSymbol name="LocalBranchIcon1" value="1" />
+		</GuidSymbol>
+		<GuidSymbol name="guidImages2" value="{C3A82292-B85F-43E5-8FFD-9B949BDA6C29}" >
+			<IDSymbol name="RemoteBranchIcon1" value="1" />
+		</GuidSymbol>
+		<GuidSymbol name="guidImages3" value="{63E01BEF-EDD9-430F-BE11-FE8E47EA07D2}" >
+			<IDSymbol name="FetchPruneBranchIcon1" value="1" />
+		</GuidSymbol>
+	</Symbols>
 </CommandTable>
