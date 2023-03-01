@@ -1,4 +1,4 @@
-﻿using EnvDTE;
+﻿using envDTE = EnvDTE80;
 using GitMore.Core;
 using GitMore.Model;
 using Microsoft.VisualStudio.Shell;
@@ -134,7 +134,9 @@ namespace GitMore
 
             // Get an instance of the currently running Visual Studio IDE
             //DTE2 dte = package.GetServiceAsync(typeof(DTE2)) as DTE2;
-            DTE dte = Package.GetGlobalService(typeof(SDTE)) as DTE;
+            //DTE dte = Package.GetGlobalService(typeof(SDTE)) as DTE;
+            EnvDTE80.DTE2 dte = Package.GetGlobalService(typeof(SDTE)) as envDTE.DTE2;
+
             return Path.GetDirectoryName(dte.Solution.FullName);
         }
 
