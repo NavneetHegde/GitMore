@@ -50,7 +50,7 @@
             </ListView.View>
             <ListView.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Checkout" Click="MenuItem_Click" 
+                    <MenuItem Header="Checkout" Click="CheckoutMenu_Click" 
                               CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}"
                               ToolTip="Checkout this branch" Cursor="Hand"></MenuItem>
                 </ContextMenu>

@@ -70,7 +70,8 @@ namespace GitMore
             PopulateBranches(branchData.Type);
         }
 
-        private void MenuItem_Click(object sender, System.Windows.RoutedEventArgs e)
+
+        private void CheckoutMenu_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             var butoonContext = (MenuItem)e.OriginalSource;
             GitBranch branchData = (GitBranch)butoonContext.CommandParameter;
@@ -86,7 +87,6 @@ namespace GitMore
             LogData.Add(new LogInfo { Record = $"Checkout {branchData.Type} branch end :: {checkoutCommandResult}" });
 
             PopulateBranches(branchData.Type);
-
         }
     }
 

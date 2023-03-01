@@ -1,4 +1,4 @@
-﻿using envDTE = EnvDTE;
+﻿using envDTE = EnvDTE80;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using System;
@@ -53,15 +53,20 @@ namespace GitMore.Git
         {
             var processOutput = GitCommands.RunVsWhereEx("-property installationpath");
             string[] branches = processOutput.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
-            string currentPath = branches.First();
-            return $@"{currentPath}\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\mingw32\bin\git.exe";
+            foreach (var branch in branches)
+            {
+                string gitExeFile = $@"{branch}\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git\Cmd\git.exe";
+                if (File.Exists(gitExeFile))
+                    return gitExeFile;
+            }
+            return null;
         }
 
         public static string GetGitRepoPath()
         {
             ThreadHelper.ThrowIfNotOnUIThread();
 
-            envDTE.DTE dte = Package.GetGlobalService(typeof(SDTE)) as envDTE.DTE;
+            EnvDTE80.DTE2 dte = Package.GetGlobalService(typeof(SDTE)) as envDTE.DTE2;
             var folderPath = Path.GetDirectoryName(dte.Solution.FullName);
             return FindGitWorkingDir(folderPath);
         }
@@ -69,6 +74,11 @@ namespace GitMore.Git
         public static Process RunGitEx(string command)
         {
             string path = GetGitExePath();
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                MessageBox.Show("This extension requires Git to be installed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
 
             ThreadHelper.ThrowIfNotOnUIThread();
             string workDir = GetGitRepoPath();
