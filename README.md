@@ -1,8 +1,8 @@
 # GitMore
-Simplifying GIT functionality.
+Distilling required GIT functionality.
 
 ## Feature
-- Git Clean : Dedicated ToolWindow to delete branch on local and remote.
+- Git More : Dedicated ToolWindow to delete branch on local and remote. Added menu to checkout selected banch
 - Placed under View -> Other Windows -> Git Clean
 
 
@@ -11,7 +11,7 @@ Simplifying GIT functionality.
 
 
 ## Requirements
-  Works with GIT installed for Visual Studio 2019
+  Works with GIT installed for Visual Studio 2019 and 2022
 
 ## Known Issues
 - None
@@ -25,4 +25,9 @@ Simplifying GIT functionality.
 
   1.2.0
   -   Added Local force delete and Remote Fetch prune feature
+
+  1.3.0
+  -   Added support for Visual Studion 2022
+  -   Renamed Git Clean tool window to Git More
+  -   Added Checkout context menu 
 
