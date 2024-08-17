@@ -58,12 +58,41 @@ namespace GitMore.Core
             return GitCommands.RunGitExWait($"{gitCommand} {branchName}");
         }
 
+        public static string ExecuteCustomCommand(string command)
+        {
+            if (!string.IsNullOrWhiteSpace(command))
+            {
+                string commandString = command;
+
+                return GitCommands.RunGitExWait(commandString);
+            }
+            return string.Empty;
+        }
+
         public static string CheckoutBranch(GitBranch branch)
         {
             string gitCommand;
             string branchName;
 
             gitCommand = GitCommands.GitCheckoutCommand;
+            branchName = branch.FullName;
+
+            string commandString = "";
+            if (branch.Type == BranchType.Remote)
+                commandString = $"{gitCommand} {branch.RemoteName} {branchName}";
+            else
+                commandString = $"{gitCommand} {branchName}";
+
+            ThreadHelper.ThrowIfNotOnUIThread();
+            return GitCommands.RunGitExWait(commandString);
+        }
+
+        public static string ViewHistoryBranch(GitBranch branch)
+        {
+            string gitCommand;
+            string branchName;
+
+            gitCommand = GitCommands.GitViewHistoryCommand;
             branchName = branch.FullName;
 
             string commandString = "";

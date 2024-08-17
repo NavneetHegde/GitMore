@@ -23,11 +23,11 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="73*" />
+            <RowDefinition Height="63*" />
             <RowDefinition Height="2" />
             <RowDefinition Height="25*" />
         </Grid.RowDefinitions>
-        <ListView Grid.Row="0" ItemsSource="{Binding}" Name="ListViewBranches" HorizontalContentAlignment="Stretch">
+        <ListView Margin="1" Grid.Row="0" ItemsSource="{Binding}" Name="ListViewBranches" HorizontalContentAlignment="Stretch">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Action">
@@ -53,18 +53,61 @@
                     <MenuItem Header="Checkout" Click="CheckoutMenu_Click" 
                               CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}"
                               ToolTip="Checkout this branch" Cursor="Hand"></MenuItem>
+                    <MenuItem Header="ViewHistory" Click="ViewHistoryMenu_Click"  
+                              CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}"
+                              ToolTip="View history of this branch" Cursor="Hand"></MenuItem>
                 </ContextMenu>
             </ListView.ContextMenu>
         </ListView>
         <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" />
-        <ScrollViewer Margin="2" Grid.Row="2" DataContext="{Binding ListViewLog}"  VerticalScrollBarVisibility="Auto">
-            <ItemsControl Margin="2,0,0,0" ItemsSource="{Binding}"  Name="ListViewLog" Background="Black" Foreground="White" >
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Path=Record}" Margin="4,0,0,0" TextWrapping="WrapWithOverflow"/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
+        <!--<StackPanel Margin="1" Orientation="Vertical" Grid.Row="2">
+            <TextBlock Background="Red"></TextBlock>-->
+        <Grid Margin="2"  Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+
+                <!-- For the header -->
+                <RowDefinition Height="*"/>
+                <!-- For the ScrollViewer -->
+            </Grid.RowDefinitions>
+            <!-- Header -->
+            <Grid Grid.Row="0" Background="DimGray">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" ></ColumnDefinition>
+                    <ColumnDefinition Width="7*" ></ColumnDefinition>
+                    <ColumnDefinition Width="1*" ></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <!-- Label centered and docked to the top -->
+                <Label Grid.Column="0" Content="Execute:" Height="25"  Foreground="Black" HorizontalAlignment="Left" VerticalAlignment="Center" />
+
+                <!-- TextBox centered and stretched horizontally -->
+                <TextBox Grid.Column="1" Name="inputTextBox" Height="25" MaxLength="50" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5" />
+
+                <!-- Button centered below the TextBox -->
+                <Button Grid.Column="2" Name="goButton" Content="Go" Width="50" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Click="GoButton_Click" />
+
+            </Grid>
+            <!--<TextBlock Text="Output" FontWeight="Bold" FontSize="14" Foreground="White" 
+                       Background="Black"  Margin="5" VerticalAlignment="Center"  HorizontalAlignment="Center"
+                       Grid.Row="0"/>-->
+            <TextBlock Text="Output" FontWeight="Bold" FontSize="14" Margin="5" VerticalAlignment="Center"  HorizontalAlignment="Center"
+                       Grid.Row="1"/>
+            <ScrollViewer Margin="2" Grid.Row="2" DataContext="{Binding ListViewLog}"  VerticalScrollBarVisibility="Auto">
+                <ItemsControl Margin="2,0,0,0" ItemsSource="{Binding}"  Name="ListViewLog" Background="Black" Foreground="White" >
+                    <ItemsControl.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform x:Name="ZoomTransform" ScaleX="1" ScaleY="1"/>
+                        </TransformGroup>
+                    </ItemsControl.RenderTransform>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Record}" Margin="4,0,0,0" TextWrapping="WrapWithOverflow"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+        <!--</StackPanel>-->
     </Grid>
 </UserControl>
