@@ -60,6 +60,7 @@ namespace GitMore.Core
 
         public static string ExecuteCustomCommand(string command)
         {
+            ThreadHelper.ThrowIfNotOnUIThread();
             if (!string.IsNullOrWhiteSpace(command))
             {
                 string commandString = command;
@@ -77,7 +78,7 @@ namespace GitMore.Core
             gitCommand = GitCommands.GitCheckoutCommand;
             branchName = branch.FullName;
 
-            string commandString = "";
+            string commandString;
             if (branch.Type == BranchType.Remote)
                 commandString = $"{gitCommand} {branch.RemoteName} {branchName}";
             else
@@ -95,7 +96,7 @@ namespace GitMore.Core
             gitCommand = GitCommands.GitViewHistoryCommand;
             branchName = branch.FullName.Replace("*", "").Trim();
 
-            string commandString = "";
+            string commandString;
             if (branch.Type == BranchType.Remote)
                 commandString = $"{gitCommand} {branch.RemoteName} {branchName}";
             else

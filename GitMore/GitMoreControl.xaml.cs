@@ -109,8 +109,6 @@ namespace GitMore
 
         private void GoButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            var butoonContext = (Button)e.OriginalSource;
-
             ThreadHelper.ThrowIfNotOnUIThread();
 
             string commandString = inputTextBox.Text;
