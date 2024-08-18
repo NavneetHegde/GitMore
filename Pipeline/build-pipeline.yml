@@ -28,7 +28,7 @@ steps:
 - task : PowerShell@2
   displayName: Update version in vsix manifest
   inputs:
-     filePath: '$(Agent.BuildDirectory)/s/update-version.ps1'
+     filePath: '$(Agent.BuildDirectory)/s/Pipeline/update-version.ps1'
      arguments: '$(Build.BuildNumber)'
      pwsh: true
 
