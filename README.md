@@ -6,9 +6,7 @@ Distilling required GIT functionality.
 - Custom command execution
 - Placed under View -> Other Windows -> Git More
 
-
-![image](https://user-images.githubusercontent.com/6188628/129263262-f0fa93fc-caef-4844-a243-29629c9949bd.png)
-
+![image](https://github.com/user-attachments/assets/9fa01024-e3bb-4aa9-b1d0-59c0009e9909)
 
 ## Requirements
   Works with GIT installed for Visual Studio 2019 and 2022
