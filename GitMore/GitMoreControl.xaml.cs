@@ -2,6 +2,7 @@
 using GitMore.Model;
 using Microsoft.VisualStudio.Shell;
 using System.Collections.ObjectModel;
+using System.Diagnostics.Eventing.Reader;
 using System.Windows.Controls;
 
 namespace GitMore
@@ -63,7 +64,7 @@ namespace GitMore
 
             var LogData = (ObservableCollection<LogInfo>)ListViewLog.DataContext;
             LogData.Add(new LogInfo { Record = $"=== Force Deleting {branchData.Type} branch begin :: {branchData.FullName} =====" });
-
+            
             string commandResult = GitMoreManager.DeleteBranch(branchData, true);
 
             LogData.Add(new LogInfo { Record = commandResult });
@@ -116,13 +117,20 @@ namespace GitMore
             if (!string.IsNullOrWhiteSpace(commandString))
             {
                 var LogData = (ObservableCollection<LogInfo>)ListViewLog.DataContext;
-                LogData.Add(new LogInfo { Record = $"\"===== Execite command : {commandString} =====" });
+                LogData.Add(new LogInfo { Record = $"===== Execute command : {commandString} =====" });
 
                 string commandResult = GitMoreManager.ExecuteCustomCommand(commandString);
 
                 LogData.Add(new LogInfo { Record = commandResult });
                 LogData.Add(new LogInfo { Record = $"=============" });
             }
+        }
+
+        private void Clear_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            // Clear log
+            var LogData = (ObservableCollection<LogInfo>)ListViewLog.DataContext;
+            LogData.Clear();
         }
     }
 

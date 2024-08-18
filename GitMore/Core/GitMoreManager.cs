@@ -93,7 +93,7 @@ namespace GitMore.Core
             string branchName;
 
             gitCommand = GitCommands.GitViewHistoryCommand;
-            branchName = branch.FullName;
+            branchName = branch.FullName.Replace("*", "").Trim();
 
             string commandString = "";
             if (branch.Type == BranchType.Remote)
