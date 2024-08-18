@@ -17,4 +17,4 @@ Distilling required GIT functionality.
 
 ## Release Notes
 
-[Change Log](CHANGELOG.MD)
+[Change Log](CHANGELOG.md)
