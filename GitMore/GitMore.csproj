@@ -98,8 +98,27 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.SDK" Version="16.0.206" ExcludeAssets="runtime" />
-    <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="16.9.2017" />
+    <PackageReference Include="Microsoft.VisualStudio.Interop">
+      <Version>17.0.32112.339</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.SDK" Version="17.0.32112.339" ExcludeAssets="runtime">
+      <IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.SDK.Analyzers">
+      <Version>17.7.32</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="17.0.5240">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="System.Collections.Immutable">
+      <Version>8.0.0</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Page Include="GitMoreControl.xaml">

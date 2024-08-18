@@ -1,9 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31205.134
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34928.147
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitMore", "GitMore\GitMore.csproj", "{2EFE1261-9091-4944-B024-9098DECCFF27}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DE4974ED-2681-4A06-AA37-FB1A0E7B8612}"
+	ProjectSection(SolutionItems) = preProject
+		Pipeline\build-pipeline.yml = Pipeline\build-pipeline.yml
+		CHANGELOG.md = CHANGELOG.md
+		README.md = README.md
+		Pipeline\update-version.ps1 = Pipeline\update-version.ps1
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

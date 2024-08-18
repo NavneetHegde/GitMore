@@ -22,28 +22,12 @@ namespace GitMore.Git
 
         public static string GitDeleteRemoteBranchCommand = "push origin --delete ";
         public static string GitCheckoutCommand = "checkout -B ";
+        public static string GitViewHistoryCommand = "log ";
 
 
         public static string VS_WHERE_PATH = $@"\Microsoft Visual Studio\Installer";
 
-        private static ProcessStartInfo CreateStartInfo(string command, string arguments, string workingDir, Encoding encoding = null)
-        {
-            return new ProcessStartInfo
-            {
-                UseShellExecute = false,
-                ErrorDialog = false,
-                CreateNoWindow = true,
-                RedirectStandardInput = true,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                StandardOutputEncoding = encoding,
-                StandardErrorEncoding = encoding,
-                FileName = command,
-                Arguments = arguments,
-                WorkingDirectory = workingDir
-            };
-        }
-
+  
         internal static string GetGitDeleteRemoteBranchCommand(string remoteRoot)
         {
             return $"push {remoteRoot} --delete ";
@@ -200,6 +184,27 @@ namespace GitMore.Git
             return string.Empty;
         }
 
+
+        #region "private"
+
+        private static ProcessStartInfo CreateStartInfo(string command, string arguments, string workingDir, Encoding encoding = null)
+        {
+            return new ProcessStartInfo
+            {
+                UseShellExecute = false,
+                ErrorDialog = false,
+                CreateNoWindow = true,
+                RedirectStandardInput = true,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                StandardOutputEncoding = encoding,
+                StandardErrorEncoding = encoding,
+                FileName = command,
+                Arguments = arguments,
+                WorkingDirectory = workingDir
+            };
+        }
+
         private static string FindGitWorkingDir(string startDir)
         {
             if (string.IsNullOrEmpty(startDir))
@@ -244,5 +249,8 @@ namespace GitMore.Git
                    Directory.Exists(Path.Combine(dir, "objects")) &&
                    Directory.Exists(Path.Combine(dir, "refs"));
         }
+
+        #endregion
+
     }
 }

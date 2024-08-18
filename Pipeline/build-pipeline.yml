@@ -1,0 +1,63 @@
+trigger:
+  branches:
+    include:
+      - release/*
+
+pool:
+  vmImage: 'windows-2019'
+
+variables:
+  patch: $[counter('VersionCounter', 0)]
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+# Set the value of $(Build.BuildNumber)
+name: 1.4.$(patch)
+
+steps:
+# Restore NuGet packages
+- task: NuGetCommand@2
+  inputs:
+    command: 'restore'
+    restoreSolution: '$(solution)'
+
+
+# Update version in the VSIX manifest
+- task: PowerShell@2
+  displayName: 'Update version in VSIX manifest'
+  inputs:
+     filePath: '$(Agent.BuildDirectory)/s/Pipeline/update-version.ps1'
+     arguments: '$(Build.BuildNumber)'
+     pwsh: true
+
+# Build the solution
+- task: VSBuild@1
+  inputs:
+    solution: '$(solution)'
+    clean: true
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+# Run tests
+- task: VSTest@2
+  inputs:
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+# Publish all needed files for the Release Pipeline
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)'
+    Contents: |
+      README.md
+      CHANGELOG.md
+      build/**
+      **/*.vsix
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+# Publish the artifact for the release pipeline
+- task: PublishPipelineArtifact@1
+  inputs:
+    artifactName: 'drop'
+    targetPath: '$(Build.ArtifactStagingDirectory)'

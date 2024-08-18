@@ -3,12 +3,10 @@ Distilling required GIT functionality.
 
 ## Feature
 - Git More : Dedicated ToolWindow to delete branch on local and remote. Added menu to checkout selected banch
-- Placed under View -> Other Windows -> Git Clean
+- Custom command execution
+- Placed under View -> Other Windows -> Git More
 
-
-![image](https://user-images.githubusercontent.com/6188628/129263262-f0fa93fc-caef-4844-a243-29629c9949bd.png)
-
-
+![image](https://github.com/user-attachments/assets/9fa01024-e3bb-4aa9-b1d0-59c0009e9909)
 
 ## Requirements
   Works with GIT installed for Visual Studio 2019 and 2022
@@ -16,18 +14,7 @@ Distilling required GIT functionality.
 ## Known Issues
 - None
 
+
 ## Release Notes
-  1.0.0
-  -   Initial release : GIT Clean feature
 
-  1.1.0
-  -   Fixed bug to select correct git repo
-
-  1.2.0
-  -   Added Local force delete and Remote Fetch prune feature
-
-  1.3.0
-  -   Added support for Visual Studion 2022
-  -   Renamed Git Clean tool window to Git More
-  -   Added Checkout context menu 
-
+[Change Log](CHANGELOG.md)

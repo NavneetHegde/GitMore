@@ -2,6 +2,7 @@
 using GitMore.Model;
 using Microsoft.VisualStudio.Shell;
 using System.Collections.ObjectModel;
+using System.Diagnostics.Eventing.Reader;
 using System.Windows.Controls;
 
 namespace GitMore
@@ -44,11 +45,12 @@ namespace GitMore
             ThreadHelper.ThrowIfNotOnUIThread();
 
             var LogData = (ObservableCollection<LogInfo>)ListViewLog.DataContext;
-            LogData.Add(new LogInfo { Record = $"Deleting {branchData.Type} branch begin :: {branchData.FullName}" });
+            LogData.Add(new LogInfo { Record = $"==== Deleting {branchData.Type} branch begin :: {branchData.FullName} =====" });
 
-            string deleteCommandResult = GitMoreManager.DeleteBranch(branchData);
+            string commandResult = GitMoreManager.DeleteBranch(branchData);
 
-            LogData.Add(new LogInfo { Record = $"Deleted {branchData.Type} branch end :: {deleteCommandResult}" });
+            LogData.Add(new LogInfo { Record = commandResult });
+            LogData.Add(new LogInfo { Record = $"=============" });
 
             PopulateBranches(branchData.Type);
         }
@@ -61,15 +63,15 @@ namespace GitMore
             ThreadHelper.ThrowIfNotOnUIThread();
 
             var LogData = (ObservableCollection<LogInfo>)ListViewLog.DataContext;
-            LogData.Add(new LogInfo { Record = $"Force Deleting {branchData.Type} branch begin :: {branchData.FullName}" });
+            LogData.Add(new LogInfo { Record = $"=== Force Deleting {branchData.Type} branch begin :: {branchData.FullName} =====" });
+            
+            string commandResult = GitMoreManager.DeleteBranch(branchData, true);
 
-            string deleteCommandResult = GitMoreManager.DeleteBranch(branchData, true);
-
-            LogData.Add(new LogInfo { Record = $"Force Deleted {branchData.Type} branch end :: {deleteCommandResult}" });
+            LogData.Add(new LogInfo { Record = commandResult });
+            LogData.Add(new LogInfo { Record = $"=============" });
 
             PopulateBranches(branchData.Type);
         }
-
 
         private void CheckoutMenu_Click(object sender, System.Windows.RoutedEventArgs e)
         {
@@ -79,14 +81,54 @@ namespace GitMore
             ThreadHelper.ThrowIfNotOnUIThread();
 
             var LogData = (ObservableCollection<LogInfo>)ListViewLog.DataContext;
-            LogData.Add(new LogInfo { Record = $"Checkout {branchData.Type} branch begin :: {branchData.FullName}" });
+            LogData.Add(new LogInfo { Record = $"===== Checkout {branchData.Type} branch begin :: {branchData.FullName} =====" });
 
-            string checkoutCommandResult = GitMoreManager.CheckoutBranch(branchData);
+            string commandResult = GitMoreManager.CheckoutBranch(branchData);
 
-
-            LogData.Add(new LogInfo { Record = $"Checkout {branchData.Type} branch end :: {checkoutCommandResult}" });
+            LogData.Add(new LogInfo { Record = commandResult });
+            LogData.Add(new LogInfo { Record = $"=============" });
 
             PopulateBranches(branchData.Type);
+        }
+
+        private void ViewHistoryMenu_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var butoonContext = (MenuItem)e.OriginalSource;
+            GitBranch branchData = (GitBranch)butoonContext.CommandParameter;
+
+            ThreadHelper.ThrowIfNotOnUIThread();
+
+            var LogData = (ObservableCollection<LogInfo>)ListViewLog.DataContext;
+            LogData.Add(new LogInfo { Record = $"===== View hoistory of {branchData.Type} branch begin :: {branchData.FullName} =====" });
+
+            string commandResult = GitMoreManager.ViewHistoryBranch(branchData);
+
+            LogData.Add(new LogInfo { Record = commandResult });
+            LogData.Add(new LogInfo { Record = $"=============" });
+        }
+
+        private void GoButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
+            string commandString = inputTextBox.Text;
+            if (!string.IsNullOrWhiteSpace(commandString))
+            {
+                var LogData = (ObservableCollection<LogInfo>)ListViewLog.DataContext;
+                LogData.Add(new LogInfo { Record = $"===== Execute command : {commandString} =====" });
+
+                string commandResult = GitMoreManager.ExecuteCustomCommand(commandString);
+
+                LogData.Add(new LogInfo { Record = commandResult });
+                LogData.Add(new LogInfo { Record = $"=============" });
+            }
+        }
+
+        private void Clear_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            // Clear log
+            var LogData = (ObservableCollection<LogInfo>)ListViewLog.DataContext;
+            LogData.Clear();
         }
     }
 
