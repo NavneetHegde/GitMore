@@ -1,0 +1,63 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+
+trigger:
+# run the pipeline for master only
+- master   
+
+pool:
+# windows server 2019 with visual studio 2019
+  vmImage: 'windows-2019' 
+
+variables:
+  patch: $[counter('VersionCounter', 0)]
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+# set the value of $(Build.BuildNumber)
+name: 1.4.$(patch) 
+
+
+steps:
+- task : PowerShell@2
+  displayName: Update version in vsix manifest
+  inputs:
+     filePath: '$(Agent.BuildDirectory)/s/update-version.ps1'
+     arguments: '$(Build.BuildNumber)'
+     pwsh: true
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'restore'
+  
+- task: VSBuild@1
+  inputs:
+    solution: '**\*.sln'
+    maximumCpuCount: true
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+    
+- task: VSTest@2
+  inputs:
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+# Publish all neeeded file for the Release Pipeline
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)'
+    Contents: 
+       README.md
+       CHANGELOG.md
+       build/**
+       **/*.vsix
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+  
+- task: PublishPipelineArtifact@0
+  inputs:
+    artifactName: 'drop'
+    targetPath: '$(Build.ArtifactStagingDirectory)'
