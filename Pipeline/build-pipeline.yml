@@ -19,7 +19,9 @@ steps:
 # Restore NuGet packages
 - task: NuGetCommand@2
   inputs:
+    command: 'restore'
     restoreSolution: '$(solution)'
+
 
 # Update version in the VSIX manifest
 - task: PowerShell@2
@@ -33,7 +35,7 @@ steps:
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
-    maximumCpuCount: true
+    clean: true
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
