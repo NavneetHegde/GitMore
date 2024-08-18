@@ -6,8 +6,7 @@ Distilling required GIT functionality.
 - Placed under View -> Other Windows -> Git Clean
 
 
-![image](https://user-images.githubusercontent.com/6188628/129263262-f0fa93fc-caef-4844-a243-29629c9949bd.png)
-
+![image](https://github.com/user-attachments/assets/c663f948-1ab3-44d7-b0be-df7735a16b05)
 
 
 ## Requirements
