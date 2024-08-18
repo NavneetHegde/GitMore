@@ -6,7 +6,9 @@
 
 trigger:
 # run the pipeline for master only
-- master   
+  branches:
+    include:
+      - release/* 
 
 pool:
 # windows server 2019 with visual studio 2019
