@@ -5,8 +5,7 @@ Distilling required GIT functionality.
 - Git More : Dedicated ToolWindow to delete branch on local and remote. Added menu to checkout selected banch
 - Placed under View -> Other Windows -> Git Clean
 
-
-![image](https://github.com/user-attachments/assets/c663f948-1ab3-44d7-b0be-df7735a16b05)
+![image](https://github.com/user-attachments/assets/9fa01024-e3bb-4aa9-b1d0-59c0009e9909)
 
 
 ## Requirements
