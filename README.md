@@ -7,11 +7,12 @@ Release  Status | v1.4 | [```Git More```](https://marketplace.visualstudio.com/i
 [Git More](https://marketplace.visualstudio.com/items?itemName=navneethegde.GitMore212206) 
 
 ## Feature
-- Git More : Dedicated ToolWindow to delete branch on local and remote. Added menu to checkout selected banch
+- Git More : Dedicated ToolWindow to delete branch on local and remote.
+- Added context menu to checkout selected banch
 - Custom command execution
 - Placed under View -> Other Windows -> Git More
 
-![image](https://github.com/user-attachments/assets/9fa01024-e3bb-4aa9-b1d0-59c0009e9909)
+![image](https://github.com/user-attachments/assets/fecf8966-7544-406c-82fa-ce6f44f22134)
 
 ## Requirements
   Works with GIT installed for Visual Studio 2019 and 2022
