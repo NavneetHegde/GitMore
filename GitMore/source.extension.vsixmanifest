@@ -9,7 +9,7 @@
     <Tags>GitMore GitDelete GitCommand GIT  Delete</Tags>
   </Metadata>
   <Installation>
-    <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[17.0,18.0)">
+    <InstallationTarget Version="[17.0,18.0)" Id="Microsoft.VisualStudio.Pro">
       <ProductArchitecture>amd64</ProductArchitecture>
     </InstallationTarget>
     <InstallationTarget Version="[16.0,17.0)" Id="Microsoft.VisualStudio.Pro">
@@ -20,6 +20,12 @@
     </InstallationTarget>
     <InstallationTarget Version="[16.0,17.0)" Id="Microsoft.VisualStudio.Community">
       <ProductArchitecture>x86</ProductArchitecture>
+    </InstallationTarget>
+    <InstallationTarget Version="[16.0,17.0)" Id="Microsoft.VisualStudio.Enterprise">
+      <ProductArchitecture>x86</ProductArchitecture>
+    </InstallationTarget>
+    <InstallationTarget Version="[17.0,18.0)" Id="Microsoft.VisualStudio.Enterprise">
+      <ProductArchitecture>amd64</ProductArchitecture>
     </InstallationTarget>
   </Installation>
   <Dependencies>
